@@ -1,4 +1,5 @@
 # need install onnx and openvino
+# pip install ultralytics onnx openvino
 # yolo ---> onnx model ---> openvino model
 
 from ultralytics import YOLO
