@@ -10,15 +10,17 @@ assert cap.isOpened(), "Error reading video file"
 w, h, fps = (int(cap.get(x)) for x in (cv2.CAP_PROP_FRAME_WIDTH, cv2.CAP_PROP_FRAME_HEIGHT, cv2.CAP_PROP_FPS))
 
 # Define region points
-# region_points = [(400, 0), (400, 400)]  # For line counting
-region_points = [ (600, 200),(300, 200),(300, 430),(600, 430)]  # For rectangle region counting
+# region_points = [(0, 400), (300, 400)]  # For line counting
+region_points = [(410, 80),(410, 430),(500, 430),(500, 80)]  # For rectangle region counting
 # region_points = [(20, 400), (1080, 400), (1080, 360), (20, 360), (20, 400)]  # For polygon region counting
+
 
 # Init ObjectCounter
 counter = object_counter.ObjectCounter()
 counter.set_args(view_img=True, reg_pts=region_points, classes_names=model.names, draw_tracks=True)
 
 # Process video
+# in 与 out 记录方向是相反的
 while cap.isOpened():
     success, im0 = cap.read()
     if not success:
@@ -30,4 +32,3 @@ while cap.isOpened():
 
 cap.release()
 video_writer.release()
-cv2.destroyAllWindows()
